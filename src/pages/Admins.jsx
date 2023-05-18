@@ -6,8 +6,8 @@ import Invite_form from '../componets/Admin/invite_form'
 const Admins = () => {
     const [invite,setInvite] = useState(false)
     const [admins,setAdmins] = useState([])
-    const url = 'http://127.0.0.1:8000/'
-    // const url = 'https://techfnatic.pythonanywhere.com/'
+    // const url = 'http://127.0.0.1:8000/'
+    const url = 'https://techfnatic.pythonanywhere.com/'
 
     const [username,setUsername] = useState(localStorage.getItem('username'))
     const [admin_type,setAdmin_type] = useState(localStorage.getItem('admin_type'))

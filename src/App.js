@@ -16,9 +16,9 @@ export default function App() {
   <Route exact path="admin" element={<Admin/>}/>
   </Routes>
   </BrowserRouter>
-  
-  return (
 
+
+  return (
     <AuthProvider>
       {routes}
     </AuthProvider>

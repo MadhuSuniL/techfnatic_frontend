@@ -2,7 +2,19 @@ import React from 'react'
 
 const Invite_form = (props) => {
 
-function send_invitation(){
+  const url = 'http://techfnatic.pythonanywhere.com/'
+    // const url = 'http://localhost:8000/'
+
+
+  function send_invitation(){
+    
+    const response = fetch(url+'api/admin/invite',{
+      method:'POST',
+      body:JSON.stringify({
+        'email':document.getElementById('email').value
+      })
+    })
+  
     props.fun(false)
     setTimeout(function(){
       alert('Invitation sent..!')
@@ -14,7 +26,7 @@ function send_invitation(){
         <h1 className='m-3 text-center text-red-400 font-bold'>Admin Invitation</h1> 
         <center>
 
-        <input type='email' className="border-2 border-gray-400 w-72 rounded-xl p-2 m-2" placeholder='Enter email of new admin..!' />
+        <input type='email' id='email' className="border-2 border-gray-400 w-72 rounded-xl p-2 m-2" placeholder='Enter email of new admin..!' />
        <br /> <button onClick={send_invitation} className="text-white border-2 my-2 duration-100 hover:scale-105 ease-linear border-green-600 bg-blue-700 py-2 px-8 rounded-3xl float-right0" >Send Invitation </button>
         </center>
 

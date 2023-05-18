@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import logo from '../../../images/logo.png'
 const RegForm = () => {
 
-    const url = 'http://localhost:8000/'
+    // const url = 'http://localhost:8000/'
     const { register, authState } = useContext(AuthContext)
     const nav = useNavigate()
     
