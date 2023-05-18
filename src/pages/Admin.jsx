@@ -24,8 +24,8 @@ const Admin = () => {
 
 
 
-    const url = 'http://127.0.0.1:8000/'
-    // const url = 'https://techfnatic.pythonanywhere.com/'
+    // const url = 'http://127.0.0.1:8000/'
+    const url = 'https://techfnatic.pythonanywhere.com/'
 
     //states
     const [products,setProducts] = useState([])
