@@ -42,19 +42,19 @@ const Admins = () => {
         
         <div className=''>
 
-        <table class="min-w-full bg-white border border-gray-300">
+        <table className="min-w-full bg-white border border-gray-300">
   <thead>
     <tr>
-      <th class="py-2 px-4 bg-gray-200 text-gray-700 font-semibold border-b">ID</th>
-      <th class="py-2 px-4 bg-gray-200 text-gray-700 font-semibold border-b">Username</th>
-      <th class="py-2 px-4 bg-gray-200 text-gray-700 font-semibold border-b">Date of Join</th>
+      <th className="py-2 px-4 bg-gray-200 text-gray-700 font-semibold border-b">ID</th>
+      <th className="py-2 px-4 bg-gray-200 text-gray-700 font-semibold border-b">Username</th>
+      <th className="py-2 px-4 bg-gray-200 text-gray-700 font-semibold border-b">Date of Join</th>
     </tr>
   </thead>
   <tbody>
-    {admins.map(admin=><tr class="hover:bg-gray-100">
-      <td class="py-2 px-4 border-b text-center">{admin.id}</td>
-      <td class="py-2 px-4 border-b text-center">{admin.username}</td>
-      <td class="py-2 px-4 border-b text-center">{admin.date_joined}</td>
+    {admins.map(admin=><tr key={admin.id} className="hover:bg-gray-100">
+      <td className="py-2 px-4 border-b text-center">{admin.id}</td>
+      <td className="py-2 px-4 border-b text-center">{admin.username}</td>
+      <td className="py-2 px-4 border-b text-center">{admin.date_joined}</td>
     </tr>)}
   </tbody>
 </table>
