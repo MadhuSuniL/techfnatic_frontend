@@ -2,7 +2,8 @@ import React from 'react'
 
 const AddForm = (props) => {
 
-  const url = 'http://127.0.0.1:8000/'
+  // const url = 'http://127.0.0.1:8000/'
+  const url = 'https://techfnatic.pythonanywhere.com/'
 
 
 
@@ -13,7 +14,7 @@ const PostApi = async (f)=>{
     form.append('content',f.target[1].value)
     form.append('img',f.target[2].files[0])
 
-    const response = await fetch(url+'api/product//',{
+    const response = await fetch(url+'api/product/',{
     method:'POST',
     body:form
   })
@@ -24,8 +25,6 @@ const PostApi = async (f)=>{
     alert('Product added')
   }
   
-  
-
 }
 
 

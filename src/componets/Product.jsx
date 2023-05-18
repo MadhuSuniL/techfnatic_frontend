@@ -4,14 +4,16 @@ import del from '../images/delete (1).png'
 import edit from '../images/edit.png'
 const Product = (props) => {
   
-  const url = 'http://127.0.0.1:8000/'
+  // const url = 'http://127.0.0.1:8000/'
+  const url = 'https://techfnatic.pythonanywhere.com/'
+
   const [edit_bool,setEdit_boll] = useState(false)
   const [content,setContent] = useState('...')
   const [title,setTitle] = useState('...')
   const [img,setImg] = useState(null)
 
   async function Delete(){
-      const response = await fetch(url+'api/product//'+String(props.id),{
+      const response = await fetch(url+'api/product/'+String(props.id),{
         method:'DELETE'
       })
       if (response.status >= 200 && response.status < 400){
@@ -21,7 +23,7 @@ const Product = (props) => {
       }
 
   async function Edit(){
-    const response = await fetch(url+'api/product//'+String(props.id),{
+    const response = await fetch(url+'api/product/'+String(props.id),{
       method:'GET'
     })
     if (response.status >= 200 && response.status < 400){
@@ -37,7 +39,7 @@ const Product = (props) => {
       form.append('img',img)
       form.append('content',content)
       form.append('title',title)
-      const response = await fetch(url+'api/product//'+String(props.id)+'/',{
+      const response = await fetch(url+'api/product/'+String(props.id)+'/',{
       method:'PUT',
       body:form
     })
@@ -47,6 +49,24 @@ const Product = (props) => {
       setEdit_boll(!edit_bool)
 
     }
+    else if (response.status == 400){
+      const form2 = new FormData()
+      form2.append('title',title)
+      form2.append('content',content)
+      
+      const response = await fetch(url+'api/product/',{
+      method:'PATCH',
+      body:form2
+    })
+  
+    if(response.status >= 200){
+      props.api()
+      setEdit_boll(!edit_bool)
+      alert('Product Updated')
+    } 
+  
+    }
+  
     }
   
   
