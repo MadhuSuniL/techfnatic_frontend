@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../componets/Home/Header'
 import banner from '../images/banner.png'
 import about from '../images/about.svg'
@@ -8,8 +8,36 @@ import fb from '../images/facebook.svg'
 import ld from '../images/linkedin.svg'
 import Product from '../componets/Product'
 import logo from '../images/logo.png'
+import Typing from '../componets/Typing'
 
 const Home = () => {
+
+    const url = 'http://127.0.0.1:8000/'
+
+    //states
+    const [products,setProducts] = useState([])
+    const [intro_head,setIntro_head] = useState('...')
+    const [intro_sub_head,setIntro_sub_head] = useState('...')
+    const [About,setAbout] = useState('...')
+    const [email,setEmail] = useState('...')
+    const [address,setAddress] = useState('...')
+    
+const Api = async ()=>{
+    const response = await fetch(url+'api/data_values/')
+    const data = await response.json()
+    setProducts(data['products'])
+    setAbout(data['about'])
+    setEmail(data['email'])
+    setAddress(data['address'])
+    setIntro_head(data['intro_head'])
+    setIntro_sub_head(data['intro_sub_head'])
+}
+
+useState(()=>{
+    Api()
+},[])
+
+
   return (
     <div>
     <header>
@@ -22,13 +50,12 @@ const Home = () => {
 
     <div className="grid md:grid-cols-2">
     <div className="p-10 md:p-28 md:pr-36">
-        <h1 className="text-left leading-tight text-5xl font-extrabold">intro_head</h1>
-    <h1 className="m-1 my-5 text-gray-900 ">intro_sub_head</h1>
-    <button className="text-white bg-red-700 py-2 px-8 duration-100 hover:scale-105 ease-linear rounded-3xl">Our Products</button>
+        <h1 className="text-left leading-tight text-5xl font-extrabold"> {intro_head}</h1>
+    <h1 className="m-1 my-5 text-gray-900 ">{intro_sub_head}</h1>
+    <button className="text-white bg-red-700 py-2 px-8 duration-100 hover:scale-105 ease-linear rounded-3xl"><a href="#products">Our Products</a></button>
     </div>
-    <img src={banner} className="mt-10 p-2 pr-28"/>
+    <img src={banner} className="mt-10 p-2 pr-28 hover:scale-95 duration-500 ease-out"/>
     </div>
-
     </section>
 
 <h1 id="products" className="text-center text-3xl font-semibold">- Our Products - </h1>
@@ -38,11 +65,10 @@ const Home = () => {
 <section>
 
 <div className="grid md:grid-cols-3 max-w-[1130px] mx-auto">
+    {
+        products.map(product=> <Product key={product.id} title={product.title} content={product.content} img={url+product.img} />)
+    }
 
-    <Product/>
-    <Product/>
-    <Product/>
-    
 </div>
 
 </section>
@@ -51,11 +77,11 @@ const Home = () => {
 
 <div className="grid md:grid-cols-2 mt-5">
 
-    <img src={about} className="w-[60%] m-10 ml-32"/>
+    <img src={about} className="w-[60%] m-10 ml-32 hover:scale-95 duration-500 ease-out"/>
 
     <div className="pt-16 m-2 md:m-10">
         <h1 className="text-left leading-tight text-4xl font-semibold">About us</h1>
-    <h1 className="m-1 md:my-5 text-gray-900 ">about</h1>
+    <h1 className="m-1 md:my-5 text-gray-900 ">{About}</h1>
     </div>
     
 
@@ -83,10 +109,10 @@ const Home = () => {
             <h1>Terms & Conditions</h1>
         </div>
         <div className="mx-10 font-semibold ">
-            <h1 className="font-bold text-red-900 text-md flex"> <img src={em} className="mr-1"/> Email</h1>
-            <h1>email</h1>
-            <h1 className="font-bold text-red-900 text-md flex"><img src={loc} className="mr-1"/>Address</h1>
-            <h1>address</h1>
+            <h1 className="hover:scale-110 duration-500 ease-out font-bold text-red-900 text-md flex"> <img src={em} className="mr-1"/> Email{email}</h1>
+            <h1>{email}</h1>
+            <h1 className=" hover:scale-110 duration-500 ease-out font-bold text-red-900 text-md flex"><img src={loc} className="mr-1"/> Address </h1>
+            <h1>{address}</h1>
             
         </div>
 
