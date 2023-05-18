@@ -1,15 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HeaderAdmin from '../componets/Admin/HeaderAdmin'
 import add from '../images/plus (2).png'
 import Product from '../componets/Product'
 import AddForm from '../componets/Admin/AddForm'
+import { AuthContext } from '../Contexts/AuthContext/AuthContext'
+import { useContext } from 'react'
+import { useAsyncError, useNavigate } from 'react-router-dom'
+import Invite_form from '../componets/Admin/invite_form'
 
 const Admin = () => {
 
     const [Add, setAdd] = useState(false)
+    const {authState} = useContext(AuthContext)
+    const nav = useNavigate()
 
-    // const url = 'http://127.0.0.1:8000/'
-    const url = 'https://techfnatic.pythonanywhere.com/'
+    // checking login
+
+    useEffect(()=>{
+        if (!authState.isAuthenticated){
+            return nav('/signin')
+        }
+    },[authState])
+
+
+
+    const url = 'http://127.0.0.1:8000/'
+    // const url = 'https://techfnatic.pythonanywhere.com/'
 
     //states
     const [products,setProducts] = useState([])
@@ -29,6 +45,11 @@ const Api = async ()=>{
     setIntro_head(data['intro_head'])
     setIntro_sub_head(data['intro_sub_head'])
 }
+
+const [username,setUsername] = useState(localStorage.getItem('username'))
+const [admin_type,setAdmin_type] = useState(localStorage.getItem('admin_type'))
+
+
 
 useState(()=>{
     Api()
@@ -61,14 +82,22 @@ const Submit = async (f)=>{
 
 }
 
+    const [invite,setInvite] = useState(false)
 
 
 
     return (
     <div>
         {Add && <AddForm api={Api} fun={setAdd}/> }
+        {invite && <Invite_form/>}
         <HeaderAdmin/>
+        <h1 className='m-3 md:mr-14 float-right shadow-2xl shadow-black p-5 rounded-xl font-bold'><span className='text-green-500'>{admin_type}</span> : {username}</h1>        
+        <br />
+        <br />
+        <br />
+        <br />
         <div className="flex justify-between px-10 m-5">
+
         <h1 id="products" className="text-center text-xl font-semibold">- Total Products ({products.length}) </h1>
         <button onClick={()=>setAdd(!Add)} className="add hover:scale-110 duration-200 text-white bg-green-700 py-2 px-6 rounded-3xl flex items-center font-bold"> <img src={add} className='w-6 m-2' /> New Product</button>
         </div>
