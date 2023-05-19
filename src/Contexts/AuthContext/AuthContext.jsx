@@ -5,7 +5,7 @@ export const AuthContext = createContext()
 export const AuthProvider = ({children}) =>{
     const token_time = 550000 
     // const domain = 'http://localhost:8000/'
-    const domain = 'http://techfnatic.pythonanywhere.com/'
+    const domain = 'https://techfnatic.pythonanywhere.com/'
     const [authState, setAuthState] = useState({
         isAuthenticated : false,
         access:null,
