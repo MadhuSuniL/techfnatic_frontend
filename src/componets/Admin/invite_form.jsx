@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const Invite_form = (props) => {
 
-  const url = 'http://techfnatic.pythonanywhere.com/'
+  const url = 'https://techfnatic.pythonanywhere.com/'
     // const url = 'http://localhost:8000/'
   const [email,setEmail] = useState(null)
 

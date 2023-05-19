@@ -6,7 +6,7 @@ import logo from '../../../images/logo.png'
 const LogForm = () => {
 
     // const url = 'http://localhost:8000/'
-    const url = 'http://techfnatic.pythonanywhere.com/'
+    const url = 'https://techfnatic.pythonanywhere.com/'
 
     const { login, authState } = useContext(AuthContext)
     const nav = useNavigate()
